@@ -1,8 +1,8 @@
 var mic;
-var mySvg;
+var mmOne;
 
 function preload(){
-  mySvg = loadImage("img/mindMaps-01.png")
+  mmOne = loadImage("img/mindMaps-01.png");
 }
 
 
@@ -17,25 +17,34 @@ function setup() {
 
 function draw() {
 
+
+
   var r = random(0, 255);
   var g = random(0, 255);
   var b = random(0, 255);
-  var x = random(-1000, 1000);
-  var y = random(-500, 1500)
+ 
 
 
-
+  var ww = (windowWidth/2);
+  var wh = (windowHeight/2);
+ 
   var vol = mic.getLevel();
-  // background(200, 200, 200);
-   fill(r,g,b);
-  ellipse(windowWidth/2, windowHeight/2, vol*1000, vol*1000);
+  var x = cos(vol * 1000.1) - g;
+  var y = x * sin(x * .1) + r;
 
-  // imageMode(windowWidth/2, windowHeight/2);
-  image(mySvg, 10, 10);
+  frameRate(5);
 
 
+  background(200, 200, 200);
+  //  fill(r,g,b);
+  // ellipse(windowWidth/2, windowHeight/2, vol*1000, vol*1000);
 
-  console.log(vol);
+  imageMode(CENTER); //IMAGE MODE CENTER MEASURES FROM CENTER POINT OF IMAGE, must use width/2 height/2 with center
+  image(mmOne, ww, wh, x, y);
+
+
+
+  console.log(mmOne);
  
 }
 
