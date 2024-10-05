@@ -1,4 +1,8 @@
 var mic;
+var amp;
+
+var scale = 10.0;
+
 var mmOne;
 
 function preload(){
@@ -8,34 +12,47 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  background(125,0,100);
+
   mic = new p5.AudioIn();
   mic.start();
+
+  amp = new p5.Amplitude();
+  amp.setInput(mic);
+
+	//  speed = random(.1, .9);
+	//  x = random(-2, 2);
+	//  y = random(-2, 2);
+  //      time1 = 2000;
+  //      picture = 1360;
+  //      easing = random(-.001, 1.1);
+
+// imageMode(CENTER);
+//  image(mmOne, windowWidth/2, windowHeight/2);
+
 }
 
 function draw() {
 
-  var ww = (windowWidth/2);
-  var wh = (windowHeight/2);
+  // noStroke();
+  // fill(0,10);
+  // rect(0,0,width,height);
+
+  scale = map(amp.getLevel(), 0, 1.0, 10, width);
+
+  // fill(255);
  
-  var vol = mic.getLevel();
-  var x = cos(vol * 1000.1) - g;
-  // var y = x * sin(x * .1) + r;
 
-  frameRate(5);
+  // fill(255);
+  // ellipse(width/2, height/2, scale, scale);
+   image(mmOne, windowWidth/2, windowHeight/2, scale, scale);
 
-
-  // background(200, 200, 200);
-  //  fill(r,g,b);
-  // ellipse(windowWidth/2, windowHeight/2, vol*1000, vol*1000);
-
-  imageMode(CENTER); //IMAGE MODE CENTER MEASURES FROM CENTER POINT OF IMAGE, must use width/2 height/2 with center
-  image(mmOne, ww, wh, x, vol*2000);
-
-
-
-  console.log(mmOne);
- 
 }
+
+
+
+
+
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
